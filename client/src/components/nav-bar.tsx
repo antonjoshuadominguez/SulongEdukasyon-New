@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useLanguage } from "@/hooks/use-language";
 import { Link, useLocation } from "wouter";
@@ -13,13 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ProfileModal } from "@/components/profile/profile-modal";
+import ProfileModal from "@/components/profile/profile-modal";
 
 export default function NavBar() {
   const { user, logoutMutation } = useAuth();
   const { translate } = useLanguage();
   const [location] = useLocation();
-  const [profileOpen, setProfileOpen] = useState(false);
 
   const handleLogout = () => {
     logoutMutation.mutate();
@@ -32,33 +30,32 @@ export default function NavBar() {
   if (!user) return null;
 
   return (
-    <nav className="custom-nav">
+    <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <span className="ml-2 mr-2 text-2xl font-bold text-yellow">ᜐᜓᜎᜓᜅ᜔</span>
-              <span className="custom-nav-title">SulongEdukasyon</span>
+              <span className="ml-2 font-bold text-xl text-primary">SulongEdukasyon</span>
             </div>
             <div className="hidden md:ml-6 md:flex md:space-x-4">
-              <Link href="/" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/') ? 'text-white font-bold' : 'text-yellow hover:text-white'}`}>
+              <Link href="/" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/') ? 'text-primary' : 'text-neutral-500 hover:text-primary'}`}>
                 <Home className="h-5 w-5 mr-1" />
                 <span>Dashboard</span>
               </Link>
               
               {user.role === 'teacher' && (
-                <Link href="/class" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/class') ? 'text-white font-bold' : 'text-yellow hover:text-white'}`}>
+                <Link href="/class" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/class') ? 'text-primary' : 'text-neutral-500 hover:text-primary'}`}>
                   <Users className="h-5 w-5 mr-1" />
                   <span>My Class</span>
                 </Link>
               )}
               
-              <Link href="/stats" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/stats') ? 'text-white font-bold' : 'text-yellow hover:text-white'}`}>
+              <Link href="/stats" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/stats') ? 'text-primary' : 'text-neutral-500 hover:text-primary'}`}>
                 <BarChart2 className="h-5 w-5 mr-1" />
                 <span>Statistics</span>
               </Link>
               
-              <Link href="/help" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/help') ? 'text-white font-bold' : 'text-yellow hover:text-white'}`}>
+              <Link href="/help" className={`flex items-center px-3 py-2 text-sm font-medium ${isActive('/help') ? 'text-primary' : 'text-neutral-500 hover:text-primary'}`}>
                 <HelpCircle className="h-5 w-5 mr-1" />
                 <span>Help Center</span>
               </Link>
@@ -69,43 +66,42 @@ export default function NavBar() {
             <div className="hidden md:flex items-center">
               {/* User profile section */}
               <div className="flex items-center">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow text-black">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-light text-white">
                   {user.role === 'teacher' ? translate("teacher") : translate("student")}
                 </span>
                 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-yellow">
-                      <Avatar className="h-10 w-10">
+                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                      <Avatar className="h-8 w-8">
                         <AvatarImage src="" alt={user.fullName} />
-                        <AvatarFallback className="bg-lightPink text-black">{getInitials(user.fullName)}</AvatarFallback>
+                        <AvatarFallback>{getInitials(user.fullName)}</AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56 border-2 border-yellow bg-white rounded-xl" align="end">
+                  <DropdownMenuContent className="w-56" align="end">
                     <DropdownMenuLabel>
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium text-black">{user.fullName}</p>
-                        <p className="text-xs text-redOrange">{user.username}</p>
+                        <p className="text-sm font-medium">{user.fullName}</p>
+                        <p className="text-xs text-neutral-500">{user.username}</p>
                       </div>
                     </DropdownMenuLabel>
-                    <DropdownMenuSeparator className="bg-yellow" />
+                    <DropdownMenuSeparator />
                     {user.class && (
-                      <DropdownMenuItem className="text-sm bg-offWhite rounded-md my-1 mx-2" disabled>
+                      <DropdownMenuItem className="text-sm" disabled>
                         {translate("class_name")}: {user.class}
                       </DropdownMenuItem>
                     )}
-                    <DropdownMenuSeparator className="bg-yellow" />
-                    <DropdownMenuItem 
-                      className="text-sm cursor-pointer hover:bg-lightPink rounded-md my-1 mx-2" 
-                      onSelect={(e) => {
-                        e.preventDefault();
-                        setProfileOpen(true);
-                      }}
-                    >
-                      <UserCog className="mr-2 h-4 w-4" /> {translate("profile_settings")}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-sm cursor-pointer hover:bg-lightPink rounded-md my-1 mx-2" onClick={handleLogout}>
+                    <DropdownMenuSeparator />
+                    <ProfileModal 
+                      trigger={
+                        <DropdownMenuItem className="text-sm cursor-pointer" onSelect={(e) => e.preventDefault()}>
+                          <UserCog className="mr-2 h-4 w-4" /> {translate("profile_settings")}
+                        </DropdownMenuItem>
+                      }
+                      onClose={() => {}}
+                    />
+                    <DropdownMenuItem className="text-sm cursor-pointer" onClick={handleLogout}>
                       <LogOut className="mr-2 h-4 w-4" /> {translate("logout")}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -116,14 +112,6 @@ export default function NavBar() {
         </div>
       </div>
     </nav>
-    
-    {/* Profile Modal */}
-    <ProfileModal
-      user={user}
-      open={profileOpen}
-      onOpenChange={setProfileOpen}
-      onLogout={handleLogout}
-    />
   );
 }
 

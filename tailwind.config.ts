@@ -41,12 +41,6 @@ export default {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        // New color scheme based on the second image
-        redOrange: "hsl(var(--color-red))",
-        pink: "hsl(var(--color-pink))",
-        lightPink: "hsl(var(--color-light-pink))",
-        yellow: "hsl(var(--color-yellow))",
-        offWhite: "hsl(var(--color-off-white))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

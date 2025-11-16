@@ -97,21 +97,21 @@ export default function AuthForm() {
   };
 
   return (
-    <Card className="auth-card">
-      <CardHeader className="px-4 pt-4">
-        <CardTitle className="text-3xl font-bold text-center text-white">SulongEdukasyon</CardTitle>
-        <CardDescription className="text-center text-yellow-200 text-lg mt-2">
+    <Card className="w-full max-w-md border-none shadow-none">
+      <CardHeader className="px-0 pt-0">
+        <CardTitle className="text-2xl font-bold text-center">SulongEdukasyon</CardTitle>
+        <CardDescription className="text-center">
           {activeTab === "login" 
-            ? "Sign In"
-            : "Register"
+            ? "Already have an account?"
+            : "Don't have an account?"
           }
         </CardDescription>
       </CardHeader>
-      <CardContent className="px-4">
+      <CardContent className="px-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6 bg-pink border-2 border-yellow rounded-full overflow-hidden">
-            <TabsTrigger value="login" className="data-[state=active]:bg-yellow data-[state=active]:text-black rounded-full text-white">Sign In</TabsTrigger>
-            <TabsTrigger value="register" className="data-[state=active]:bg-yellow data-[state=active]:text-black rounded-full text-white">Register</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsTrigger value="login">Log In</TabsTrigger>
+            <TabsTrigger value="register">Register</TabsTrigger>
           </TabsList>
           
           {/* Login Form */}
@@ -123,11 +123,11 @@ export default function AuthForm() {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white">Email</FormLabel>
+                      <FormLabel>Username</FormLabel>
                       <FormControl>
-                        <Input placeholder="Email" className="custom-input" {...field} />
+                        <Input placeholder="Username" {...field} />
                       </FormControl>
-                      <FormMessage className="text-yellow-200" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -137,20 +137,18 @@ export default function AuthForm() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white">Password</FormLabel>
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="Password" className="custom-input" {...field} />
+                        <Input type="password" placeholder="Password" {...field} />
                       </FormControl>
-                      <FormMessage className="text-yellow-200" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
                 
-
-                
                 <Button 
                   type="submit" 
-                  className="custom-button w-full mt-6" 
+                  className="w-full mt-6" 
                   disabled={loginMutation.isPending}
                 >
                   {loginMutation.isPending ? (
@@ -159,7 +157,7 @@ export default function AuthForm() {
                       Loading...
                     </>
                   ) : (
-                    "Sign In"
+                    "Log In"
                   )}
                 </Button>
               </form>
@@ -175,11 +173,11 @@ export default function AuthForm() {
                   name="fullName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white">Full Name</FormLabel>
+                      <FormLabel>Full Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Full Name" className="custom-input" {...field} />
+                        <Input placeholder="Full Name" {...field} />
                       </FormControl>
-                      <FormMessage className="text-yellow-200" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -189,11 +187,11 @@ export default function AuthForm() {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white">Username</FormLabel>
+                      <FormLabel>Username</FormLabel>
                       <FormControl>
-                        <Input placeholder="Username" className="custom-input" {...field} />
+                        <Input placeholder="Username" {...field} />
                       </FormControl>
-                      <FormMessage className="text-yellow-200" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -204,11 +202,11 @@ export default function AuthForm() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white">Password</FormLabel>
+                        <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input type="password" placeholder="Password" className="custom-input" {...field} />
+                          <Input type="password" placeholder="Password" {...field} />
                         </FormControl>
-                        <FormMessage className="text-yellow-200" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -218,11 +216,11 @@ export default function AuthForm() {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white">Confirm</FormLabel>
+                        <FormLabel>Confirm Password</FormLabel>
                         <FormControl>
-                          <Input type="password" placeholder="Confirm Password" className="custom-input" {...field} />
+                          <Input type="password" placeholder="Confirm Password" {...field} />
                         </FormControl>
-                        <FormMessage className="text-yellow-200" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -233,22 +231,22 @@ export default function AuthForm() {
                   name="role"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white">Role</FormLabel>
+                      <FormLabel>Role</FormLabel>
                       <Select 
                         onValueChange={field.onChange} 
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="custom-input">
+                          <SelectTrigger>
                             <SelectValue placeholder="Select Role" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-white border-2 border-yellow rounded-xl">
-                          <SelectItem value="student" className="hover:bg-lightPink rounded-md my-1 mx-2">Student</SelectItem>
-                          <SelectItem value="teacher" className="hover:bg-lightPink rounded-md my-1 mx-2">Teacher</SelectItem>
+                        <SelectContent>
+                          <SelectItem value="student">Student</SelectItem>
+                          <SelectItem value="teacher">Teacher</SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage className="text-yellow-200" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -258,18 +256,18 @@ export default function AuthForm() {
                   name="class"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white">Class Name (Optional)</FormLabel>
+                      <FormLabel>Class Name (Optional)</FormLabel>
                       <FormControl>
-                        <Input placeholder="6-A" className="custom-input" {...field} />
+                        <Input placeholder="6-A" {...field} />
                       </FormControl>
-                      <FormMessage className="text-yellow-200" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
                 
                 <Button 
                   type="submit" 
-                  className="custom-button w-full mt-6" 
+                  className="w-full mt-6" 
                   disabled={registerMutation.isPending}
                 >
                   {registerMutation.isPending ? (

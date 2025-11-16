@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/hooks/use-language";
 import StudentLeaderboard from "@/components/student-leaderboard";
-import { Eye, EyeOff } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -62,7 +61,6 @@ export default function SimplePicturePuzzle({ lobbyId }: { lobbyId?: number }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isPuzzleStarted, setIsPuzzleStarted] = useState(false);
   const [showTriviaDialog, setShowTriviaDialog] = useState(false);
-  const [showReferenceImage, setShowReferenceImage] = useState(false);
   const [moves, setMoves] = useState(0);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
 
@@ -308,20 +306,9 @@ export default function SimplePicturePuzzle({ lobbyId }: { lobbyId?: number }) {
               </div>
             </div>
 
-            <div className="flex gap-2">
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="h-10 w-10"
-                onClick={() => setShowReferenceImage(!showReferenceImage)}
-                title={translate("Toggle reference image")}
-              >
-                {showReferenceImage ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-              </Button>
-              <Button variant="outline" onClick={initializePuzzle}>
-                {translate("Restart")}
-              </Button>
-            </div>
+            <Button variant="outline" onClick={initializePuzzle}>
+              {translate("Restart")}
+            </Button>
           </div>
 
           <Card className="w-full max-w-md">
@@ -341,32 +328,6 @@ export default function SimplePicturePuzzle({ lobbyId }: { lobbyId?: number }) {
               </div>
             </CardContent>
           </Card>
-          
-          {/* Reference Image Dialog */}
-          <Dialog open={showReferenceImage} onOpenChange={setShowReferenceImage}>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle>{translate("Reference Image")}</DialogTitle>
-                <DialogDescription>
-                  {translate("This is the original image you're trying to arrange")}
-                </DialogDescription>
-              </DialogHeader>
-              <div className="p-4">
-                <div className="overflow-hidden rounded-md border border-gray-200">
-                  <img 
-                    src={(window as any).customPuzzleImage || marcosImage} 
-                    alt="Reference image" 
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button onClick={() => setShowReferenceImage(false)} className="w-full">
-                  {translate("Close")}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
         </>
       )}
 

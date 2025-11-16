@@ -36,8 +36,10 @@ function App() {
   return (
     <AuthProvider>
       <LanguageProvider>
-        <Router />
-        <Toaster />
+        <div className="bg-gradient-custom min-h-screen">
+          <Router />
+          <Toaster />
+        </div>
       </LanguageProvider>
     </AuthProvider>
   );

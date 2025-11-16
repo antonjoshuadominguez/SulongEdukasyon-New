@@ -13,22 +13,22 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 p-4">
+    <div className="min-h-screen flex flex-col justify-center items-center p-4 bg-gradient-custom">
 
       
-      <div className="max-w-7xl w-full flex flex-col md:flex-row bg-white rounded-lg overflow-hidden shadow-xl">
-        {/* Auth form section */}
-        <div className="w-full md:w-1/2 p-8">
+      <div className="max-w-7xl w-full flex flex-col items-center">
+        {/* Auth form section - Centered in the page like in the image */}
+        <div className="w-full max-w-md">
           <AuthForm />
         </div>
         
-        {/* Hero section */}
-        <div className="w-full md:w-1/2 bg-primary p-8 flex flex-col justify-center">
+        {/* Hidden on mobile but visible on larger screens */}
+        <div className="hidden">
           <div className="max-w-lg mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-black mb-6">
               Maligayang pagdating sa SulongEdukasyon
             </h1>
-            <p className="text-white text-base mb-8">
+            <p className="text-black text-base mb-8">
               Isang platform ng pag-aaral na may larong pang-edukasyon para sa mga mag-aaral ng Grade 6 Araling Panlipunan
             </p>
             <div className="space-y-4">

@@ -10,7 +10,7 @@ import {
   Globe,
   Trophy
 } from "lucide-react";
-import ProfileModal from "@/components/profile/profile-modal";
+import { ProfileModal } from "@/components/profile/profile-modal";
 import SidebarRecentLobbies from "@/components/sidebar-recent-lobbies";
 
 import { useState } from "react";
@@ -54,8 +54,8 @@ export default function SidebarNavigation() {
         <Sidebar>
           <SidebarHeader className="px-2 py-4">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">
-                SE
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-base">
+                ᜐᜓᜎᜓᜅ᜔
               </div>
               <div className="font-bold text-xl text-neutral-900">SulongEdukasyon</div>
             </div>
@@ -80,25 +80,30 @@ export default function SidebarNavigation() {
               <SidebarMenuItem>
                 <SidebarMenuButton 
                   onClick={() => setProfileOpen(true)}
-                  className="hover:bg-neutral-100"
+                  className="hover:bg-lightPink rounded-lg flex items-center px-3 py-2 transition-colors duration-200"
                 >
-                  <Avatar className="h-8 w-8 mr-2">
+                  <Avatar className="h-8 w-8 mr-2 border-2 border-yellow">
                     <AvatarFallback className="bg-primary text-white">
                       {user.fullName ? getInitials(user.fullName) : user.username.substring(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="text-sm font-medium">
-                    {user.fullName || user.username}
-                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold">
+                      {user.fullName || user.username}
+                    </span>
+                    <span className="text-xs text-redOrange">
+                      {user.role === 'teacher' ? translate("teacher") : translate("student")}
+                    </span>
+                  </div>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton 
                   onClick={handleLogout} 
-                  className="text-red-500 hover:bg-red-50 hover:text-red-600"
+                  className="text-redOrange hover:bg-lightPink rounded-lg flex items-center px-3 py-2 transition-colors duration-200"
                 >
                   <LogOut className="mr-2 h-5 w-5" />
-                  <span>{translate("logout")}</span>
+                  <span className="font-bold">{translate("logout")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               
@@ -108,11 +113,12 @@ export default function SidebarNavigation() {
         </Sidebar>
       </SidebarProvider>
 
-      {profileOpen && (
-        <ProfileModal
-          onClose={() => setProfileOpen(false)}
-        />
-      )}
+      <ProfileModal
+        user={user}
+        open={profileOpen}
+        onOpenChange={setProfileOpen}
+        onLogout={handleLogout}
+      />
     </>
   );
 }

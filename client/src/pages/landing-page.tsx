@@ -22,17 +22,18 @@ import antonImage from "@assets/anton.jpg";
 const LandingLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-white shadow-sm py-4 border-b">
+      <header className="custom-nav shadow-md py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
-              <span className="text-2xl font-bold text-primary">SulongEdukasyon</span>
+              <span className="text-2xl font-bold text-yellow mr-2">ᜐᜓᜎᜓᜅ᜔</span>
+              <span className="text-2xl font-bold text-white">SulongEdukasyon</span>
             </div>
             <nav className="hidden md:flex space-x-8 items-center">
-              <a href="#features" className="text-gray-600 hover:text-primary">Features</a>
-              <a href="#games" className="text-gray-600 hover:text-primary">Games</a>
-              <a href="#team" className="text-gray-600 hover:text-primary">Team</a>
-              <Button asChild size="sm">
+              <a href="#features" className="text-yellow hover:text-white">Features</a>
+              <a href="#games" className="text-yellow hover:text-white">Games</a>
+              <a href="#team" className="text-yellow hover:text-white">Team</a>
+              <Button asChild size="sm" className="custom-button">
                 <Link to="/auth">Sign in</Link>
               </Button>
             </nav>

@@ -2,23 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import custom component styles */
+@import './components/ui/custom-styles.css';
+
 /* Custom styles */
 .bg-pattern {
   background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 12px 12px;
 }
 
+/* Custom gradient background */
+.bg-gradient-custom {
+  background: linear-gradient(180deg, 
+    #9370DB 0%, 
+    #FBD786 35%, 
+    #FCA5A5 50%, 
+    #FBD786 65%, 
+    #9370DB 100%);
+  background-attachment: fixed;
+}
+
+/* Color scheme based on the second image */
 :root {
+  /* E43D12 - Red/Orange */
+  --color-red: 10, 83%, 54%;
+  /* D6536D - Pink */
+  --color-pink: 343, 65%, 58%;
+  /* FFA286 - Light Pink */
+  --color-light-pink: 15, 100%, 76%;
+  /* EFB11D - Yellow */
+  --color-yellow: 43, 87%, 53%;
+  /* EBE9E1 - Off-white */
+  --color-off-white: 39, 13%, 90%;
+  
   --primary-dark: color-mix(in srgb, var(--primary) 70%, black);
 }
 
 @layer base {
+  /* Set Comic Sans as the font */
+  @font-face {
+    font-family: 'Comic Sans MS';
+    src: local('Comic Sans MS');
+  }
+
   * {
     @apply border-border;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply antialiased text-foreground;
+    background-color: theme('colors.background');
+  }
+  
+  /* Apply the gradient background to the whole page */
+  #root {
+    @apply bg-gradient-custom min-h-screen;
   }
 
   /* Card animations */

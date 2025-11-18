@@ -35,25 +35,33 @@ const execPromise = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const npmExec = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+
+async function run(command, options = {}) {
+  const fullCommand = `${npmExec} ${command}`;
+  console.log(`Running: ${fullCommand}`);
+  await execPromise(fullCommand, { ...options });
+}
+
 async function main() {
   try {
     // First, build the frontend
     console.log('Building frontend...');
-    await execPromise('vite build');
+    await run('vite build');
     console.log('Frontend build complete.');
     
     // Build all the server files to make sure everything is included
     console.log('Building backend...');
-    await execPromise('esbuild server/*.ts --platform=node --outdir=dist/server');
+    await run('esbuild server/*.ts --platform=node --outdir=dist/server');
     console.log('Backend build complete.');
     
     // Build the vite.config.ts file that's imported in server/vite.ts
     console.log('Building vite config...');
-    await execPromise('esbuild vite.config.ts --platform=node --outdir=dist');
+    await run('esbuild vite.config.ts --platform=node --outdir=dist');
     
     // Also build shared code which contains the schema
     console.log('Building shared code...');
-    await execPromise('esbuild shared/schema.ts --platform=node --outdir=dist/shared');
+    await run('esbuild shared/schema.ts --platform=node --outdir=dist/shared');
     console.log('Shared code build complete. Fixing import statements...');
     
     // Fix imports in server files
